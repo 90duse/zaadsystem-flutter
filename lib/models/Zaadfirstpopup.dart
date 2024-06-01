@@ -72,8 +72,9 @@ class _ZaadfirstpopupState extends State<Zaadfirstpopup> {
                                         if (password.isNotEmpty &&
                                             password ==
                                                 userpassword.toString()) {
-                                          Navigator.of(context).pushNamed(
-                                              "lib/pages/zaadService.dart");
+                                          // Navigator.of(context).pushNamed(
+                                          //     "lib/pages/zaadService.dart");
+                                          zaadservices();
                                         } else {
                                           Navigator.of(context).pop();
                                         }
@@ -96,5 +97,80 @@ class _ZaadfirstpopupState extends State<Zaadfirstpopup> {
       },
       child: const Icon(Icons.add),
     );
+  }
+
+  zaadservices() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
+            title: const Text('Send instruction'),
+            content: SingleChildScrollView(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ListBody(
+                  children: [
+                    const Text(
+                      'ZAAD SHILING',
+                      textAlign: TextAlign.left,
+                    ),
+                    const Text(
+                      '1: Itus Hadhaaga',
+                    ),
+                    const Text(
+                      '2: Lacag Dirid',
+                    ),
+                    const Text(
+                      '3: Lacag Labixid',
+                    ),
+                    const Text(
+                      '4: Ku iibso',
+                    ),
+                    const Text(
+                      '5: Itus Dhaqdhaqaaq',
+                    ),
+                    const Text(
+                      '6: E-voucher',
+                    ),
+                    const Text(
+                      '7: Dara-Salaam Bank',
+                    ),
+                    const Text(
+                      '10: Ka bax',
+                    ),
+                    TextFormField(
+                        // controller: passwordController,
+                        ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      child: const Text('Close'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    const Text("|"),
+                    TextButton(
+                      child: const Text('SEND'),
+                      onPressed: () {
+                        // if (passwordController == 1111) {
+                        //   Navigator.pushNamed(
+                        //       context, "lib/pages/zaadService.dart");
+                        // }
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                )
+              ],
+            )),
+          );
+        });
   }
 }

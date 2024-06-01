@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zaadsystem_flutter/models/Zaadpopup_model.dart';
-import 'package:zaadsystem_flutter/models/card_model.dart';
+import 'package:zaadsystem_flutter/models/Zaadfirstpopup.dart';
+
 import 'package:zaadsystem_flutter/pages/home.dart';
 import 'package:zaadsystem_flutter/pages/routes.dart';
 
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Talowadaag App',
+      title: 'ZAAD SERVICE',
       home: Home(),
       routes: approutes,
     );
