@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zaadsystem_flutter/models/Zaadpopup_model.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,6 +11,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ZAAD SERVICE'),
+      ),
+      floatingActionButton: const Zaadfirstpopup(),
+      body: const Column(),
+    );
   }
 }
