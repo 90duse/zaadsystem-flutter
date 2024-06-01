@@ -5,6 +5,6 @@ import 'package:zaadsystem_flutter/pages/home.dart';
 import 'package:zaadsystem_flutter/pages/zaadService.dart';
 
 var approutes = {
-  "lib/pages/zaadService.dart": ((context) => Zaadservices()),
-  "lib/pages/home.dart": ((context) => Home())
+  "lib/pages/zaadService.dart": ((context) => const ZaadClass()),
+  "lib/pages/home.dart": ((context) => const Home())
 };

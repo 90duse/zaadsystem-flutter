@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zaadsystem_flutter/models/Zaadfirstpopup.dart';
-
 import 'package:zaadsystem_flutter/pages/home.dart';
 import 'package:zaadsystem_flutter/pages/routes.dart';
 
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'ZAAD SERVICE',
-      home: Home(),
+      home: const Home(),
       routes: approutes,
     );
   }

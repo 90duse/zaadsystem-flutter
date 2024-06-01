@@ -1,0 +1,3 @@
+displaymessage(message) {
+  return message;
+}
