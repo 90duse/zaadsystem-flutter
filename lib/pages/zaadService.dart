@@ -18,6 +18,7 @@ class ZaadClass extends StatefulWidget {
 
 TextEditingController chooseController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
+TextEditingController enternumberController = TextEditingController();
 String password = '';
 int userpassword = 111;
 final userinformation = Userinformation();
@@ -82,9 +83,11 @@ class _ZaadClassState extends State<ZaadClass> {
                                         if (password.isNotEmpty &&
                                             password ==
                                                 userinformation.password) {
-                                          // Navigator.of(context).pushNamed(
-                                          //     "lib/pages/zaadService.dart");
+                                          Navigator.of(context).pop();
                                           zaadservices();
+                                          setState(() {
+                                            passwordController.clear();
+                                          });
                                         } else {
                                           Navigator.of(context).pop();
                                         }
@@ -175,12 +178,9 @@ class _ZaadClassState extends State<ZaadClass> {
                         if (choose == services.Itushadhaaga.toString()) {
                           Navigator.of(context).pop();
                           itushadhaaga();
-                          setState(() {
-                            chooseController.clear();
-                          });
+                          setState(() {});
                         } else if (choose == services.Lacagdirid.toString()) {
                           Navigator.of(context).pop();
-                          lacagdirid();
                         }
 
                         // Navigator.of(context).pop();
@@ -212,38 +212,30 @@ class _ZaadClassState extends State<ZaadClass> {
                         'ZAAD SHILING',
                         textAlign: TextAlign.left,
                       ),
+                      const Text("Xisaabtada: "),
                       Text(
-                        "Hadhaagagu waa: ${userinformation.accountbalance}",
+                        "Hadhaaga waa: ${userinformation.accountbalance}",
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        child: const Text('Close'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      const Text("|"),
-                      TextButton(
-                        child: const Text('SEND'),
-                        onPressed: () {
-                          final choose = chooseController.text;
-                          var services = {1: 'Itus Hadhaaga', 2: "Lacag Dirid"};
-                          if (choose == services[0])
-                            Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Center(
+                    child: TextButton(
+                      child: const Text('Close'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   )
                 ],
               )));
         });
   }
 
-  lacagdirid() {
+  //Lacag Dirid operation Functions starts here
+  askNumber() {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -263,7 +255,7 @@ class _ZaadClassState extends State<ZaadClass> {
                       ),
                       const Text('Geli Numberka aad lacagta u dirayso'),
                       TextFormField(
-                        controller: chooseController,
+                        controller: enternumberController,
                       ),
                     ],
                   ),
@@ -280,10 +272,13 @@ class _ZaadClassState extends State<ZaadClass> {
                       TextButton(
                         child: const Text('SEND'),
                         onPressed: () {
-                          final choose = chooseController.text;
-                          var services = {1: 'Itus Hadhaaga', 2: "Lacag Dirid"};
-                          if (choose == services[0])
+                          final numbercontroller = chooseController.text;
+                          if (numbercontroller.isNotEmpty &&
+                              numbercontroller ==
+                                  userinformation.number.toString()) {
                             Navigator.of(context).pop();
+                          }
+                          Navigator.of(context).pop();
                         },
                       ),
                     ],
@@ -292,4 +287,6 @@ class _ZaadClassState extends State<ZaadClass> {
               )));
         });
   }
+
+  // lacagdirid functions end here
 }
