@@ -1,9 +1,13 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:zaadsystem_flutter/models/commonfunctions.dart';
+import 'package:zaadsystem_flutter/models/services.dart';
+import 'package:zaadsystem_flutter/models/user_information.dart';
+import 'package:zaadsystem_flutter/pages/itushadhaaga.dart';
 
 class ZaadClass extends StatefulWidget {
   const ZaadClass({super.key});
@@ -12,9 +16,12 @@ class ZaadClass extends StatefulWidget {
   State<ZaadClass> createState() => _ZaadClassState();
 }
 
+TextEditingController chooseController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 String password = '';
 int userpassword = 111;
+final userinformation = Userinformation();
+final services = Zaadervicesclass();
 
 //passwordformkey = GlobalKey();
 final passwordformkey = GlobalKey<FormState>();
@@ -52,6 +59,9 @@ class _ZaadClassState extends State<ZaadClass> {
                               TextFormField(
                                 controller: passwordController,
                                 keyboardType: TextInputType.number,
+                                onFieldSubmitted: (value) {
+                                  passwordController.clear();
+                                },
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -71,7 +81,7 @@ class _ZaadClassState extends State<ZaadClass> {
                                       try {
                                         if (password.isNotEmpty &&
                                             password ==
-                                                userpassword.toString()) {
+                                                userinformation.password) {
                                           // Navigator.of(context).pushNamed(
                                           //     "lib/pages/zaadService.dart");
                                           zaadservices();
@@ -143,8 +153,8 @@ class _ZaadClassState extends State<ZaadClass> {
                       '10: Ka bax',
                     ),
                     TextFormField(
-                        // controller: passwordController,
-                        ),
+                      controller: chooseController,
+                    ),
                   ],
                 ),
                 Row(
@@ -160,11 +170,20 @@ class _ZaadClassState extends State<ZaadClass> {
                     TextButton(
                       child: const Text('SEND'),
                       onPressed: () {
-                        // if (passwordController == 1111) {
-                        //   Navigator.pushNamed(
-                        //       context, "lib/pages/zaadService.dart");
-                        // }
-                        Navigator.of(context).pop();
+                        final choose = chooseController.text;
+
+                        if (choose == services.Itushadhaaga.toString()) {
+                          Navigator.of(context).pop();
+                          itushadhaaga();
+                          setState(() {
+                            chooseController.clear();
+                          });
+                        } else if (choose == services.Lacagdirid.toString()) {
+                          Navigator.of(context).pop();
+                          lacagdirid();
+                        }
+
+                        // Navigator.of(context).pop();
                       },
                     ),
                   ],
@@ -172,6 +191,105 @@ class _ZaadClassState extends State<ZaadClass> {
               ],
             )),
           );
+        });
+  }
+
+  itushadhaaga() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              backgroundColor: Colors.white,
+              surfaceTintColor: Colors.white,
+              title: const Text('Send instruction'),
+              content: SingleChildScrollView(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ListBody(
+                    children: [
+                      const Text(
+                        'ZAAD SHILING',
+                        textAlign: TextAlign.left,
+                      ),
+                      Text(
+                        "Hadhaagagu waa: ${userinformation.accountbalance}",
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      const Text("|"),
+                      TextButton(
+                        child: const Text('SEND'),
+                        onPressed: () {
+                          final choose = chooseController.text;
+                          var services = {1: 'Itus Hadhaaga', 2: "Lacag Dirid"};
+                          if (choose == services[0])
+                            Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              )));
+        });
+  }
+
+  lacagdirid() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              backgroundColor: Colors.white,
+              surfaceTintColor: Colors.white,
+              title: const Text('Send instruction'),
+              content: SingleChildScrollView(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ListBody(
+                    children: [
+                      const Text(
+                        'ZAAD SHILING',
+                        textAlign: TextAlign.left,
+                      ),
+                      const Text('Geli Numberka aad lacagta u dirayso'),
+                      TextFormField(
+                        controller: chooseController,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      const Text("|"),
+                      TextButton(
+                        child: const Text('SEND'),
+                        onPressed: () {
+                          final choose = chooseController.text;
+                          var services = {1: 'Itus Hadhaaga', 2: "Lacag Dirid"};
+                          if (choose == services[0])
+                            Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              )));
         });
   }
 }
