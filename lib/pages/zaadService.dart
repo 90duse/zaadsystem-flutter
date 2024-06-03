@@ -19,8 +19,10 @@ class ZaadClass extends StatefulWidget {
 TextEditingController chooseController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 TextEditingController enternumberController = TextEditingController();
+TextEditingController enteramountController = TextEditingController();
+TextEditingController enterpasswordController = TextEditingController();
+TextEditingController checkmoneyController = TextEditingController();
 String password = '';
-int userpassword = 111;
 final userinformation = Userinformation();
 final services = Zaadervicesclass();
 
@@ -178,9 +180,15 @@ class _ZaadClassState extends State<ZaadClass> {
                         if (choose == services.Itushadhaaga.toString()) {
                           Navigator.of(context).pop();
                           itushadhaaga();
-                          setState(() {});
+                          setState(() {
+                            chooseController.clear();
+                          });
                         } else if (choose == services.Lacagdirid.toString()) {
                           Navigator.of(context).pop();
+                          askNumber();
+                          setState(() {
+                            chooseController.clear();
+                          });
                         }
 
                         // Navigator.of(context).pop();
@@ -235,8 +243,8 @@ class _ZaadClassState extends State<ZaadClass> {
   }
 
   //Lacag Dirid operation Functions starts here
-  askNumber() {
-    showDialog(
+  Future<dynamic> askNumber() async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -272,13 +280,20 @@ class _ZaadClassState extends State<ZaadClass> {
                       TextButton(
                         child: const Text('SEND'),
                         onPressed: () {
-                          final numbercontroller = chooseController.text;
+                          final numbercontroller = enternumberController.text;
                           if (numbercontroller.isNotEmpty &&
                               numbercontroller ==
                                   userinformation.number.toString()) {
                             Navigator.of(context).pop();
+                            askamount();
+                            setState(() {
+                              enternumberController.clear();
+                            });
+                          } else {
+                            displaymessage(
+                                'Fadlan Number sax ah geli ama inagu kala wad');
+                            Navigator.of(context).pop();
                           }
-                          Navigator.of(context).pop();
                         },
                       ),
                     ],
@@ -286,6 +301,136 @@ class _ZaadClassState extends State<ZaadClass> {
                 ],
               )));
         });
+  }
+
+  Future<dynamic> askamount() async {
+    String amount = '100';
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          title: const Text('Send instruction'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ListBody(
+                  children: [
+                    const Text(
+                      'ZAAD SHILING',
+                      textAlign: TextAlign.left,
+                    ),
+                    const Text('Geli lacagta aad u dirayso'),
+                    TextFormField(
+                      controller: enteramountController,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      child: const Text('Close'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    const Text("|"),
+                    TextButton(
+                      child: const Text('SEND'),
+                      onPressed: () {
+                        final amountcontroller = enteramountController.text;
+                        if (amountcontroller.isNotEmpty) {
+                          // amount = enteramountController.text;
+                          asktocheck();
+                          Navigator.of(context).pop();
+
+                          // Navigator.of(context)
+                          //     .pop(amount); // Passing amount to pop()
+                        } else {
+                          displaymessage('Invalid Amount');
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    return amount;
+  }
+
+  Future asktocheck() async {
+    var lacagtaladiray = await askamount();
+    if (lacagtaladiray != null) {
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
+            title: const Text('Send instruction'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ListBody(
+                    children: [
+                      const Text(
+                        'ZAAD SHILING',
+                        textAlign: TextAlign.left,
+                      ),
+                      Text(
+                        'Ma hubtaa in aad u dirayso $lacagtaladiray  ${userinformation.name}',
+                      ),
+                      TextFormField(
+                        controller: checkmoneyController,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      const Text("|"),
+                      TextButton(
+                        child: const Text('SEND'),
+                        onPressed: () {
+                          final checkcontroller = checkmoneyController.text;
+                          if (checkcontroller.isNotEmpty &&
+                              checkcontroller ==
+                                  userinformation.hubi.toString()) {
+                            // Perform any action you need after successful validation
+                            setState(() {
+                              checkmoneyController.clear();
+                            });
+                          } else {
+                            displaymessage('PIN ka aad gelisay waa qalad');
+                          }
+                          // Close the dialog regardless of validation result
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   // lacagdirid functions end here
