@@ -25,6 +25,7 @@ TextEditingController checkmoneyController = TextEditingController();
 String password = '';
 final userinformation = Userinformation();
 final services = Zaadervicesclass();
+final tariikhda = DateTime(2024);
 
 //passwordformkey = GlobalKey();
 final passwordformkey = GlobalKey<FormState>();
@@ -185,7 +186,7 @@ class _ZaadClassState extends State<ZaadClass> {
                           });
                         } else if (choose == services.Lacagdirid.toString()) {
                           Navigator.of(context).pop();
-                          askNumber();
+                          askNumber(context);
                           setState(() {
                             chooseController.clear();
                           });
@@ -243,7 +244,7 @@ class _ZaadClassState extends State<ZaadClass> {
   }
 
   //Lacag Dirid operation Functions starts here
-  Future<dynamic> askNumber() async {
+  Future<dynamic> askNumber(BuildContext context) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -285,7 +286,7 @@ class _ZaadClassState extends State<ZaadClass> {
                               numbercontroller ==
                                   userinformation.number.toString()) {
                             Navigator.of(context).pop();
-                            askamount();
+                            askamount(context);
                             setState(() {
                               enternumberController.clear();
                             });
@@ -303,8 +304,8 @@ class _ZaadClassState extends State<ZaadClass> {
         });
   }
 
-  Future<dynamic> askamount() async {
-    String amount = '100';
+  Future<dynamic> askamount(BuildContext context) async {
+    String amount;
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -343,9 +344,9 @@ class _ZaadClassState extends State<ZaadClass> {
                       onPressed: () {
                         final amountcontroller = enteramountController.text;
                         if (amountcontroller.isNotEmpty) {
-                          // amount = enteramountController.text;
-                          asktocheck();
+                          amount = enteramountController.text;
                           Navigator.of(context).pop();
+                          asktocheck(amount);
 
                           // Navigator.of(context)
                           //     .pop(amount); // Passing amount to pop()
@@ -363,12 +364,13 @@ class _ZaadClassState extends State<ZaadClass> {
         );
       },
     );
+    amount = enteramountController.text;
     return amount;
   }
 
-  Future asktocheck() async {
-    var lacagtaladiray = await askamount();
-    if (lacagtaladiray != null) {
+  Future asktocheck(String? amount) async {
+    //var lacagtaladiray = await askamount();
+    if (amount != null) {
       await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -387,8 +389,10 @@ class _ZaadClassState extends State<ZaadClass> {
                         textAlign: TextAlign.left,
                       ),
                       Text(
-                        'Ma hubtaa in aad u dirayso $lacagtaladiray  ${userinformation.name}',
+                        'Ma hubtaa in aad $amount udirtid ${userinformation.name} (${userinformation.number})',
                       ),
+                      const Text('1: Haa'),
+                      const Text('2: Maya'),
                       TextFormField(
                         controller: checkmoneyController,
                       ),
@@ -411,7 +415,9 @@ class _ZaadClassState extends State<ZaadClass> {
                           if (checkcontroller.isNotEmpty &&
                               checkcontroller ==
                                   userinformation.hubi.toString()) {
-                            // Perform any action you need after successful validation
+                            userinformation.accountbalance.toString;
+                            displaymessage(
+                                'Waxaad ${amount} u dirtay ${userinformation.name} tariikhda : $tariikhda Hadhaagaagu waa : ${amount} ');
                             setState(() {
                               checkmoneyController.clear();
                             });
