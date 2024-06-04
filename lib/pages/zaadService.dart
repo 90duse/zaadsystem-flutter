@@ -26,6 +26,7 @@ final services = Zaadervicesclass();
 final tariikhda = DateTime(2024);
 final kuiibso = Kuiibso();
 final lacagdirid = Lacagdirid();
+final itushadhaaga = Itushadhaaga();
 
 //passwordformkey = GlobalKey();
 final passwordformkey = GlobalKey<FormState>();
@@ -180,7 +181,7 @@ class _ZaadClassState extends State<ZaadClass> {
 
                           if (choose == services.itushadhaaga.toString()) {
                             Navigator.of(context).pop();
-                            itushadhaaga();
+                            itushadhaaga.itushadhaaga(context);
                             setState(() {
                               chooseController.clear();
                             });
@@ -210,45 +211,4 @@ class _ZaadClassState extends State<ZaadClass> {
   }
 
   // Itus Hadhaaga Operation Starts Here
-  itushadhaaga() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              backgroundColor: Colors.white,
-              surfaceTintColor: Colors.white,
-              title: const Text('Send instruction'),
-              content: SingleChildScrollView(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ListBody(
-                    children: [
-                      const Text(
-                        'ZAAD SHILING',
-                        textAlign: TextAlign.left,
-                      ),
-                      const Text("Xisaabtada: "),
-                      Text(
-                        "Hadhaaga waa: ${userinformation.accountbalance}",
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Center(
-                    child: TextButton(
-                      child: const Text('Close'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  )
-                ],
-              )));
-        });
-  }
-
-  // Itus Hadhaaga Operation Ends here
 }
