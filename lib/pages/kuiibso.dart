@@ -8,6 +8,7 @@ TextEditingController entermaclumaadController = TextEditingController();
 TextEditingController enterqaansheegadController = TextEditingController();
 TextEditingController enterlacagtaController = TextEditingController();
 TextEditingController enterhubiController = TextEditingController();
+TextEditingController enternumberController = TextEditingController();
 
 final tariikh = DateTime.timestamp();
 
