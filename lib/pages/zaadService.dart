@@ -460,6 +460,7 @@ class _ZaadClassState extends State<ZaadClass> {
   Future successMessage(
     dynamic amount,
   ) async {
+    num yournewBalance = userinformation.accountbalance - num.parse(amount);
     if (amount != null) {
       await showDialog(
         context: context,
@@ -478,7 +479,7 @@ class _ZaadClassState extends State<ZaadClass> {
                         textAlign: TextAlign.left,
                       ),
                       Text(
-                          'Waxaad $amount u dirtay ${userinformation.name} tariikhda : $tariikhda Hadhaagaagu waa : ${userinformation.accountbalance.toString()}')
+                          'Waxaad $amount u dirtay ${userinformation.name} tariikhda : $tariikhda Hadhaagaagu waa : $yournewBalance')
                     ],
                   ),
                   Row(
