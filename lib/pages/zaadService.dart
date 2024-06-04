@@ -8,6 +8,7 @@ import 'package:zaadsystem_flutter/models/commonfunctions.dart';
 import 'package:zaadsystem_flutter/models/services.dart';
 import 'package:zaadsystem_flutter/models/user_information.dart';
 import 'package:zaadsystem_flutter/pages/itushadhaaga.dart';
+import 'package:zaadsystem_flutter/pages/kuiibso.dart';
 
 class ZaadClass extends StatefulWidget {
   const ZaadClass({super.key});
@@ -26,6 +27,7 @@ String password = '';
 final userinformation = Userinformation();
 final services = Zaadervicesclass();
 final tariikhda = DateTime(2024);
+final kuiibso = Kuiibso();
 
 //passwordformkey = GlobalKey();
 final passwordformkey = GlobalKey<FormState>();
@@ -174,27 +176,33 @@ class _ZaadClassState extends State<ZaadClass> {
                     ),
                     const Text("|"),
                     TextButton(
-                      child: const Text('SEND'),
-                      onPressed: () {
-                        final choose = chooseController.text;
+                        child: const Text('SEND'),
+                        onPressed: () {
+                          final choose = chooseController.text;
 
-                        if (choose == services.Itushadhaaga.toString()) {
-                          Navigator.of(context).pop();
-                          itushadhaaga();
-                          setState(() {
-                            chooseController.clear();
-                          });
-                        } else if (choose == services.Lacagdirid.toString()) {
-                          Navigator.of(context).pop();
-                          askNumber(context);
-                          setState(() {
-                            chooseController.clear();
-                          });
-                        }
+                          if (choose == services.itushadhaaga.toString()) {
+                            Navigator.of(context).pop();
+                            itushadhaaga();
+                            setState(() {
+                              chooseController.clear();
+                            });
+                          } else if (choose == services.lacagdirid.toString()) {
+                            Navigator.of(context).pop();
+                            askNumber(context);
+                            setState(() {
+                              chooseController.clear();
+                            });
+                          } else if (choose == services.kuiibso.toString()) {
+                            Navigator.of(context).pop();
+                            kuiibso.askNumber(context);
+                            //askNumber(context);
+                            setState(() {
+                              chooseController.clear();
+                            });
 
-                        // Navigator.of(context).pop();
-                      },
-                    ),
+                            // Navigator.of(context).pop();
+                          }
+                        }),
                   ],
                 )
               ],
@@ -203,6 +211,7 @@ class _ZaadClassState extends State<ZaadClass> {
         });
   }
 
+  // Itus Hadhaaga Operation Starts Here
   itushadhaaga() {
     showDialog(
         context: context,
@@ -243,6 +252,7 @@ class _ZaadClassState extends State<ZaadClass> {
         });
   }
 
+  // Itus Hadhaaga Operation Ends here
   //Lacag Dirid operation Functions starts here
   Future<dynamic> askNumber(BuildContext context) async {
     await showDialog(
@@ -492,4 +502,8 @@ class _ZaadClassState extends State<ZaadClass> {
   }
 
   // lacagdirid functions end here
+  //---------------------------------
+  //Ku iibso Operation starts Here
+
+  //Ku iibso Operation end here
 }
