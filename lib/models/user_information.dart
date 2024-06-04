@@ -1,7 +1,7 @@
 class Userinformation {
-  String name = 'Mohamed';
+  String name = 'Mohamed Xamse Dayuur';
   String number = '0634209123';
-  dynamic accountbalance = 500;
+  num accountbalance = 500;
   int id = 1;
   String password = '0000';
   String hubi = 'Haa';

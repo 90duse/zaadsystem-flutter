@@ -305,7 +305,8 @@ class _ZaadClassState extends State<ZaadClass> {
   }
 
   Future<dynamic> askamount(BuildContext context) async {
-    String amount;
+    dynamic amount;
+
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -347,6 +348,7 @@ class _ZaadClassState extends State<ZaadClass> {
                           amount = enteramountController.text;
                           Navigator.of(context).pop();
                           asktocheck(amount);
+                          //successMessage(amount);
 
                           // Navigator.of(context)
                           //     .pop(amount); // Passing amount to pop()
@@ -365,11 +367,13 @@ class _ZaadClassState extends State<ZaadClass> {
       },
     );
     amount = enteramountController.text;
+
     return amount;
   }
 
-  Future asktocheck(String? amount) async {
+  Future asktocheck(dynamic amount) async {
     //var lacagtaladiray = await askamount();
+
     if (amount != null) {
       await showDialog(
         context: context,
@@ -411,20 +415,68 @@ class _ZaadClassState extends State<ZaadClass> {
                       TextButton(
                         child: const Text('SEND'),
                         onPressed: () {
-                          final checkcontroller = checkmoneyController.text;
-                          if (checkcontroller.isNotEmpty &&
-                              checkcontroller ==
-                                  userinformation.hubi.toString()) {
-                            userinformation.accountbalance.toString;
-                            displaymessage(
-                                'Waxaad ${amount} u dirtay ${userinformation.name} tariikhda : $tariikhda Hadhaagaagu waa : ${amount} ');
-                            setState(() {
-                              checkmoneyController.clear();
-                            });
-                          } else {
-                            displaymessage('PIN ka aad gelisay waa qalad');
+                          try {
+                            final checkcontroller = checkmoneyController.text;
+                            if (checkcontroller.isNotEmpty &&
+                                checkcontroller == '1') {
+                              //userinformation.accountbalance.toString;
+                              Navigator.of(context).pop();
+                              successMessage(amount);
+
+                              setState(() {
+                                checkmoneyController.clear();
+                              });
+                            } else {
+                              displaymessage('PIN ka aad gelisay waa qalad');
+                            }
+                          } catch (e) {
+                            displaymessage('Unkown error is being cough');
                           }
                           // Close the dialog regardless of validation result
+                          // Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  Future successMessage(
+    dynamic amount,
+  ) async {
+    if (amount != null) {
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ListBody(
+                    children: [
+                      const Text(
+                        'ZAAD SHILING',
+                        textAlign: TextAlign.left,
+                      ),
+                      Text(
+                          'Waxaad $amount u dirtay ${userinformation.name} tariikhda : $tariikhda Hadhaagaagu waa : ${userinformation.accountbalance.toString()}')
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        child: const Text('Close'),
+                        onPressed: () {
                           Navigator.of(context).pop();
                         },
                       ),
