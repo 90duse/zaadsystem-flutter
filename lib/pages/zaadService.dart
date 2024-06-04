@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:zaadsystem_flutter/models/commonfunctions.dart';
 import 'package:zaadsystem_flutter/models/services.dart';
 import 'package:zaadsystem_flutter/models/user_information.dart';
+import 'package:zaadsystem_flutter/pages/itusdhaqdhaqaaq.dart';
 import 'package:zaadsystem_flutter/pages/itushadhaaga.dart';
 import 'package:zaadsystem_flutter/pages/kuiibso.dart';
 import 'package:zaadsystem_flutter/pages/lacagdirid.dart';
+import 'package:zaadsystem_flutter/pages/lacaglabixid.dart';
 
 class ZaadClass extends StatefulWidget {
   const ZaadClass({super.key});
@@ -27,6 +29,8 @@ final tariikhda = DateTime(2024);
 final kuiibso = Kuiibso();
 final lacagdirid = Lacagdirid();
 final itushadhaaga = Itushadhaaga();
+final lacaglabixid = Lacaglabixid();
+final itusdhaqdhaqaaq = ItusDhaqdhaqaaq();
 
 //passwordformkey = GlobalKey();
 final passwordformkey = GlobalKey<FormState>();
@@ -200,6 +204,26 @@ class _ZaadClassState extends State<ZaadClass> {
                             });
 
                             // Navigator.of(context).pop();
+                          } else if (choose ==
+                              services.lacaglabixid.toString()) {
+                            Navigator.of(context).pop();
+                            lacaglabixid.askbranchnumber(context);
+                            //askNumber(context);
+                            setState(() {
+                              chooseController.clear();
+                            });
+
+                            // Navigator.of(context).pop();
+                          } else if (choose ==
+                              services.itusdhaqdhaqaaq.toString()) {
+                            Navigator.of(context).pop();
+                            itusdhaqdhaqaaq.itusdhaqdhaqaaq(context);
+
+                            setState(() {
+                              chooseController.clear();
+                            });
+
+                            // Navigator.of(context).pop();
                           }
                         }),
                   ],
@@ -209,6 +233,4 @@ class _ZaadClassState extends State<ZaadClass> {
           );
         });
   }
-
-  // Itus Hadhaaga Operation Starts Here
 }

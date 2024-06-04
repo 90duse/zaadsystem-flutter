@@ -158,7 +158,7 @@ class Lacaglabixid {
                   ListBody(
                     children: [
                       Text(
-                        'Ma hubtaa in aad kala baxdid $lacagtalalabaxayo khasnajiga ${laantaDeeroMull.aqoonsi} ** (${laantaDeeroMull.name} ${(laantaDeeroMull.aqoonsi)})',
+                        'Ma hubtaa in aad kala baxdid $lacagtalalabaxayo khasnajiga ${laantaDeeroMull.aqoonsi} ** ${laantaDeeroMull.name} ${(laantaDeeroMull.aqoonsi)})',
                       ),
                       const Text('1: Haa'),
                       const Text('2: Maya'),
@@ -184,7 +184,6 @@ class Lacaglabixid {
                             final hubiController = hubilacagtaController.text;
                             if (hubiController.isNotEmpty &&
                                 hubiController == '1') {
-                              //userinformation.accountbalance.toString;
                               Navigator.of(context).pop();
                               waadlabaxday(context, lacagtalalabaxayo);
 
@@ -193,6 +192,7 @@ class Lacaglabixid {
                               });
                             } else {
                               displaymessage('Bye hadaa');
+                              Navigator.of(context).pop();
                             }
                           } catch (e) {
                             displaymessage('Unkown error is being cough');
@@ -216,7 +216,6 @@ class Lacaglabixid {
     BuildContext context,
     dynamic lacagtalalabaxayo,
   ) async {
-    //num yournewBalance = userinformation.accountbalance - num.parse(amount);
     if (lacagtalalabaxayo != null) {
       await showDialog(
         context: context,
@@ -235,8 +234,8 @@ class Lacaglabixid {
                         textAlign: TextAlign.left,
                       ),
                       Text(
-                          'Waxaad $lacagtalalabaxayo kala baxday laanta ${laantaDeeroMull.name} tellerka ${laantaDeeroMull.operator} tariikhda : $tariikhda'),
-                      Text('Fadlan sug inta la xaqiijinayo  Mahadsanid'),
+                          'Waxaad $lacagtalalabaxayo kala baxday ${laantaDeeroMull.name} teller: ${laantaDeeroMull.operator} tariikhda : $tariikhda'),
+                      const Text('Fadlan sug inta la xaqiijinayo  Mahadsanid'),
                     ],
                   ),
                   Row(
