@@ -200,22 +200,18 @@ class _ZaadClassState extends State<ZaadClass> {
                           } else if (choose == services.kuiibso.toString()) {
                             Navigator.of(context).pop();
                             kuiibso.askNumber(context);
-                            //askNumber(context);
+
                             setState(() {
                               chooseController.clear();
                             });
-
-                            // Navigator.of(context).pop();
                           } else if (choose ==
                               services.lacaglabixid.toString()) {
                             Navigator.of(context).pop();
                             lacaglabixid.askbranchnumber(context);
-                            //askNumber(context);
+
                             setState(() {
                               chooseController.clear();
                             });
-
-                            // Navigator.of(context).pop();
                           } else if (choose ==
                               services.itusdhaqdhaqaaq.toString()) {
                             Navigator.of(context).pop();
@@ -224,8 +220,6 @@ class _ZaadClassState extends State<ZaadClass> {
                             setState(() {
                               chooseController.clear();
                             });
-
-                            // Navigator.of(context).pop();
                           } else if (choose == services.evoucher.toString()) {
                             Navigator.of(context).pop();
                             evoucher.itusEvoucher(
@@ -235,8 +229,16 @@ class _ZaadClassState extends State<ZaadClass> {
                             setState(() {
                               chooseController.clear();
                             });
+                          } else if (choose ==
+                              services.darasalambank.toString()) {
+                            Navigator.of(context).pop();
+                            evoucher.itusEvoucher(
+                              context,
+                            );
 
-                            // Navigator.of(context).pop();
+                            setState(() {
+                              chooseController.clear();
+                            });
                           }
                         }),
                   ],
