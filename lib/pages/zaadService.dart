@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:zaadsystem_flutter/models/commonfunctions.dart';
 import 'package:zaadsystem_flutter/models/services.dart';
 import 'package:zaadsystem_flutter/models/user_information.dart';
+import 'package:zaadsystem_flutter/pages/evoucher.dart';
 import 'package:zaadsystem_flutter/pages/itusdhaqdhaqaaq.dart';
 import 'package:zaadsystem_flutter/pages/itushadhaaga.dart';
 import 'package:zaadsystem_flutter/pages/kuiibso.dart';
@@ -31,6 +32,7 @@ final lacagdirid = Lacagdirid();
 final itushadhaaga = Itushadhaaga();
 final lacaglabixid = Lacaglabixid();
 final itusdhaqdhaqaaq = ItusDhaqdhaqaaq();
+final evoucher = Evoucher();
 
 //passwordformkey = GlobalKey();
 final passwordformkey = GlobalKey<FormState>();
@@ -218,6 +220,17 @@ class _ZaadClassState extends State<ZaadClass> {
                               services.itusdhaqdhaqaaq.toString()) {
                             Navigator.of(context).pop();
                             itusdhaqdhaqaaq.itusdhaqdhaqaaq(context);
+
+                            setState(() {
+                              chooseController.clear();
+                            });
+
+                            // Navigator.of(context).pop();
+                          } else if (choose == services.evoucher.toString()) {
+                            Navigator.of(context).pop();
+                            evoucher.itusEvoucher(
+                              context,
+                            );
 
                             setState(() {
                               chooseController.clear();
