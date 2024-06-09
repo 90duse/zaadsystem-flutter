@@ -342,7 +342,7 @@ class Evoucher {
                           if (hubiController.isNotEmpty &&
                               hubiController == '1') {
                             Navigator.of(context).pop();
-                            lacagAyaadkushubatay(context, lacagta);
+                            //lacagAyaadkushubatay(context, lacagta);
 
                             setState(() {
                               hubilacagtaController.clear();
