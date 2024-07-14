@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:zaadsystem_flutter/models/commonfunctions.dart';
 import 'package:zaadsystem_flutter/models/services.dart';
@@ -38,88 +40,103 @@ final evoucher = Evoucher();
 final passwordformkey = GlobalKey<FormState>();
 
 class _ZaadClassState extends State<ZaadClass> {
+  final formkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      //backgroundColor: Colors.white,
-      onPressed: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                backgroundColor: Colors.white,
-                surfaceTintColor: Colors.white,
-                title: const Text('Send instruction'),
-                content: SingleChildScrollView(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ListBody(
-                      children: [
-                        const Text(
-                          'ZAAD SERVICE',
-                          textAlign: TextAlign.left,
-                        ),
-                        const Text(
-                          'Fadlan Geli PIN-kaaga',
-                        ),
-                        Form(
-                          key: passwordformkey,
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                controller: passwordController,
-                                keyboardType: TextInputType.number,
-                                onFieldSubmitted: (value) {
-                                  passwordController.clear();
-                                },
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  TextButton(
-                                    child: const Text('Close'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  const Text("|"),
-                                  TextButton(
-                                    child: const Text('SEND'),
-                                    onPressed: () {
-                                      password = passwordController.text;
-                                      try {
-                                        if (password.isNotEmpty &&
-                                            password ==
-                                                userinformation.password) {
-                                          Navigator.of(context).pop();
-                                          zaadservices();
-                                          setState(() {
-                                            passwordController.clear();
-                                          });
-                                        } else {
-                                          Navigator.of(context).pop();
-                                        }
-                                      } catch (e) {
-                                        displaymessage(
-                                            'Unkown error is cought ...');
-                                      }
-                                    },
-                                  )
-                                ],
-                              )
-                            ],
+    return Form(
+      key: formkey,
+      child: FloatingActionButton(
+        //backgroundColor: Colors.white,
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: Colors.white,
+                  surfaceTintColor: Colors.white,
+                  title: const Text('Send instruction'),
+                  content: SingleChildScrollView(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ListBody(
+                        children: [
+                          const Text(
+                            'ZAAD SERVICE',
+                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
-              );
-            });
-      },
-      child: const Icon(Icons.add),
+                          const Text(
+                            'Fadlan Geli PIN-kaaga',
+                          ),
+                          Form(
+                            key: passwordformkey,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(4),
+                                  ],
+                                  controller: passwordController,
+                                  keyboardType: TextInputType.number,
+                                  onFieldSubmitted: (value) {
+                                    passwordController.clear();
+                                  },
+                                  // validator: (value) {
+                                  //   if (passwordController == null) {
+                                  //     return 'Can not be null ';
+                                  //   } else {
+                                  //     return null;
+                                  //   }
+                                  // },
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    TextButton(
+                                      child: const Text('Close'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    const Text("|"),
+                                    TextButton(
+                                      child: const Text('SEND'),
+                                      onPressed: () {
+                                        password = passwordController.text;
+                                        try {
+                                          if (password.isNotEmpty &&
+                                              password ==
+                                                  userinformation.password) {
+                                            Navigator.of(context).pop();
+                                            zaadservices();
+                                            setState(() {
+                                              passwordController.clear();
+                                            });
+                                          } else {
+                                            print('Password is Required');
+                                            Navigator.of(context).pop();
+                                          }
+                                        } catch (e) {
+                                          displaymessage(
+                                              'Unkown error is cought ...');
+                                        }
+                                      },
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )),
+                );
+              });
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
