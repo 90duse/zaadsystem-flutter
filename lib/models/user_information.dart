@@ -1,7 +1,7 @@
 class Userinformation {
   String name = 'Mohamed Xamse Dayuur';
   String number = '0634209123';
-  num accountbalance = 500;
+  num accountbalance = 500000;
   int id = 1;
   String password = '0000';
   String hubi = 'Haa';

@@ -158,7 +158,7 @@ class Lacaglabixid {
                   ListBody(
                     children: [
                       Text(
-                        'Ma hubtaa in aad kala baxdid $lacagtalalabaxayo khasnajiga ${laantaDeeroMull.aqoonsi} ** ${laantaDeeroMull.name} ${(laantaDeeroMull.aqoonsi)})',
+                        'Ma hubtaa in aad kala baxdid SLSH$lacagtalalabaxayo khasnajiga ${laantaDeeroMull.aqoonsi} ** ${laantaDeeroMull.name} ${(laantaDeeroMull.aqoonsi)})',
                       ),
                       const Text('1: Haa'),
                       const Text('2: Maya'),
