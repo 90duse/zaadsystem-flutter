@@ -240,7 +240,7 @@ class Lacagdirid {
                         textAlign: TextAlign.left,
                       ),
                       Text(
-                          'Waxaad $amount u dirtay ${userinformation.name} tariikhda : $tariikhda Hadhaagaagu waa : $yournewBalance')
+                          'Waxaad SLSH$amount u dirtay ${userinformation.name} tariikhda : $tariikhda Hadhaagaagu waa : SLSH $yournewBalance')
                     ],
                   ),
                   Row(
